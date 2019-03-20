@@ -99,114 +99,31 @@ function randMultiple() {
   );
 }
 
-//if we click on an answer box1 (HardCoded)
-document.getElementById("box1").onclick = function answerBox() {
-  if (playing) {
-    //if we are playing
-    var doc = document.getElementById("box1"); //The Document object
-    if (doc.innerHTML == correctAnswer) {
-      //If correct
-      score++; //increase score by 1
-      document.getElementById("scorevalue").innerHTML = score;
-      hide("wrong");
-      show("correct");
-      //show correct box for one second
-      setTimeout(function() {
-        hide("correct");
-      }, 1000);
-      generateQA(); //generate new Q&A
-    } else {
-      //If wrong
-      hide("correct");
-      show("wrong");
-      //show try again box for one second
-      setTimeout(function() {
+///If we click on an answer box (for loop)
+for (i = 1; i < 5; i++) {
+  document.getElementById("box" + i).onclick = function() {
+    if (playing) {
+      //if we are playing
+      if (this.innerHTML == correctAnswer) {
+        //If correct
+        score++; //increase score by 1
+        document.getElementById("scorevalue").innerHTML = score;
         hide("wrong");
-      }, 1000);
-    }
-  }
-};
-
-//if we click on an answer box1 (HardCoded)
-document.getElementById("box2").onclick = function answerBox() {
-  if (playing) {
-    //if we are playing
-    var doc = document.getElementById("box2"); //The Document object
-    if (doc.innerHTML == correctAnswer) {
-      //If correct
-      score++; //increase score by 1
-      document.getElementById("scorevalue").innerHTML = score;
-      hide("wrong");
-      show("correct");
-      //show correct box for one second
-      setTimeout(function() {
+        show("correct");
+        //show correct box for one second
+        setTimeout(function() {
+          hide("correct");
+        }, 1000);
+        generateQA(); //generate new Q&A
+      } else {
+        //If wrong
         hide("correct");
-      }, 1000);
-      generateQA(); //generate new Q&A
-    } else {
-      //If wrong
-      hide("correct");
-      show("wrong");
-      //show try again box for one second
-      setTimeout(function() {
-        hide("wrong");
-      }, 1000);
+        show("wrong");
+        //show try again box for one second
+        setTimeout(function() {
+          hide("wrong");
+        }, 1000);
+      }
     }
-  }
-};
-
-//if we click on an answer box1 (HardCoded)
-document.getElementById("box3").onclick = function answerBox() {
-  if (playing) {
-    //if we are playing
-    var doc = document.getElementById("box3"); //The Document object
-    if (doc.innerHTML == correctAnswer) {
-      //If correct
-      score++; //increase score by 1
-      document.getElementById("scorevalue").innerHTML = score;
-      hide("wrong");
-      show("correct");
-      //show correct box for one second
-      setTimeout(function() {
-        hide("correct");
-      }, 1000);
-      generateQA(); //generate new Q&A
-    } else {
-      //If wrong
-      hide("correct");
-      show("wrong");
-      //show try again box for one second
-      setTimeout(function() {
-        hide("wrong");
-      }, 1000);
-    }
-  }
-};
-
-//if we click on an answer box1 (HardCoded)
-document.getElementById("box4").onclick = function answerBox() {
-  if (playing) {
-    //if we are playing
-    var doc = document.getElementById("box4"); //The Document object
-    if (doc.innerHTML == correctAnswer) {
-      //If correct
-      score++; //increase score by 1
-      document.getElementById("scorevalue").innerHTML = score;
-      hide("wrong");
-      show("correct");
-      //show correct box for one second
-      setTimeout(function() {
-        hide("correct");
-      }, 1000);
-      generateQA(); //generate new Q&A
-    } else {
-      //If wrong
-      hide("correct");
-      show("wrong");
-      //show try again box for one second
-      setTimeout(function() {
-        hide("wrong");
-      }, 1000);
-    }
-  }
-};
+  };
+}
