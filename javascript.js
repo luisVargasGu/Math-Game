@@ -5,7 +5,7 @@ var timeremaining;
 
 // if we click on the start/reset
 function start_reset() {
-  if (playing != true) {
+  if (playing !== true) {
     // if we are not playing
     hide("gameOver");
     score = 0; //set score to 0
@@ -15,6 +15,7 @@ function start_reset() {
     document.getElementById("timeremainingvalue").innerHTML = timeremaining;
     document.getElementById("startreset").innerHTML = "Reset Game"; //change button to reset
     playing = true;
+    generateQA();
     startCountDown();
   } else {
     // if we are playing
@@ -28,7 +29,7 @@ function start_reset() {
 function startCountDown() {
   action = setInterval(function() {
     timeremaining--;
-    document.getElementById("timeremainingvalue").innerHTML = timeremaining;
+    document.getElementById("timeremainingvalue").innerHTML = timeremaining; //Updates the time remaining element in html
     if (timeremaining == 0) {
       // Game over
       stopCountdown();
@@ -59,19 +60,153 @@ function show(Id) {
   document.getElementById(Id).style.display = "block";
 }
 
+//generate new Q&A
 function generateQA() {
-  //generate new Q&A
+  //check to make sure that the new question is not thesame as the past question
+  var currentQ = document.getElementById("question").innerHTML;
+  var reverseQ = currentQ.split("");
+  reverseQ = reverseQ.reverse();
+  reverseQ = reverseQ.join("");
+  do {
+    var x = 1 + Math.round(Math.random() * 11);
+    var y = 1 + Math.round(Math.random() * 11);
+    correctAnswer = x * y;
+    var newQuestion = x + "x" + y;
+  } while (currentQ == newQuestion || reverseQ == newQuestion);
+  document.getElementById("question").innerHTML = newQuestion; //Displays the new question
+  correctBox = 1 + Math.round(Math.random() * 3); //Which box the right answer goes in
+  //generate wrong answers and place correctAnswer
+  //Make sure all boxes don't have thesame wrong answer
+  var answers = [correctAnswer];
+  for (i = 1; i < 5; i++) {
+    var wrongAnswer = randMultiple();
+    while (answers.indexOf(wrongAnswer) > -1) {
+      wrongAnswer = randMultiple();
+    }
+    if (i !== correctBox) {
+      answers.push(wrongAnswer);
+      document.getElementById("box" + i).innerHTML = wrongAnswer;
+    } else {
+      document.getElementById("box" + i).innerHTML = correctAnswer;
+    }
+  }
+}
+
+//generate random multiple
+function randMultiple() {
   return (
-    Math.round(Math.random() * 11) + " x " + Math.round(Math.random() * 11)
+    (1 + Math.round(Math.random() * 11)) * (Math.round(Math.random() * 11) + 1)
   );
 }
 
-//if we click on an answer box
-//if we are playing
-//correct?
-//yes
-//increase score by 1
-//show correct box for one second
-//generate new Q&A
-//no
-//show try again box for one second
+//if we click on an answer box1 (HardCoded)
+document.getElementById("box1").onclick = function answerBox() {
+  if (playing) {
+    //if we are playing
+    var doc = document.getElementById("box1"); //The Document object
+    if (doc.innerHTML == correctAnswer) {
+      //If correct
+      score++; //increase score by 1
+      document.getElementById("scorevalue").innerHTML = score;
+      hide("wrong");
+      show("correct");
+      //show correct box for one second
+      setTimeout(function() {
+        hide("correct");
+      }, 1000);
+      generateQA(); //generate new Q&A
+    } else {
+      //If wrong
+      hide("correct");
+      show("wrong");
+      //show try again box for one second
+      setTimeout(function() {
+        hide("wrong");
+      }, 1000);
+    }
+  }
+};
+
+//if we click on an answer box1 (HardCoded)
+document.getElementById("box2").onclick = function answerBox() {
+  if (playing) {
+    //if we are playing
+    var doc = document.getElementById("box2"); //The Document object
+    if (doc.innerHTML == correctAnswer) {
+      //If correct
+      score++; //increase score by 1
+      document.getElementById("scorevalue").innerHTML = score;
+      hide("wrong");
+      show("correct");
+      //show correct box for one second
+      setTimeout(function() {
+        hide("correct");
+      }, 1000);
+      generateQA(); //generate new Q&A
+    } else {
+      //If wrong
+      hide("correct");
+      show("wrong");
+      //show try again box for one second
+      setTimeout(function() {
+        hide("wrong");
+      }, 1000);
+    }
+  }
+};
+
+//if we click on an answer box1 (HardCoded)
+document.getElementById("box3").onclick = function answerBox() {
+  if (playing) {
+    //if we are playing
+    var doc = document.getElementById("box3"); //The Document object
+    if (doc.innerHTML == correctAnswer) {
+      //If correct
+      score++; //increase score by 1
+      document.getElementById("scorevalue").innerHTML = score;
+      hide("wrong");
+      show("correct");
+      //show correct box for one second
+      setTimeout(function() {
+        hide("correct");
+      }, 1000);
+      generateQA(); //generate new Q&A
+    } else {
+      //If wrong
+      hide("correct");
+      show("wrong");
+      //show try again box for one second
+      setTimeout(function() {
+        hide("wrong");
+      }, 1000);
+    }
+  }
+};
+
+//if we click on an answer box1 (HardCoded)
+document.getElementById("box4").onclick = function answerBox() {
+  if (playing) {
+    //if we are playing
+    var doc = document.getElementById("box4"); //The Document object
+    if (doc.innerHTML == correctAnswer) {
+      //If correct
+      score++; //increase score by 1
+      document.getElementById("scorevalue").innerHTML = score;
+      hide("wrong");
+      show("correct");
+      //show correct box for one second
+      setTimeout(function() {
+        hide("correct");
+      }, 1000);
+      generateQA(); //generate new Q&A
+    } else {
+      //If wrong
+      hide("correct");
+      show("wrong");
+      //show try again box for one second
+      setTimeout(function() {
+        hide("wrong");
+      }, 1000);
+    }
+  }
+};
